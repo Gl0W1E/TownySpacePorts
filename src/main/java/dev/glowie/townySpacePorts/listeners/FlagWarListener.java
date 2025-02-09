@@ -30,6 +30,7 @@ public class FlagWarListener implements Listener {
                 Location loc = ConfigUtils.getPortLocationXYZ(ConfigUtils.getPortSettings(portName, world), Bukkit.getWorld(world));
                 if (!TownyAPI.getInstance().isWilderness(loc)) {
                     TownyAPI.getInstance().getTownBlock(loc).setTown(tblck.getTownOrNull());
+                    TownyAPI.getInstance().getTownBlock(loc).save();
                 }
             }
         }

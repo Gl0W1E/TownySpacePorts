@@ -1,6 +1,7 @@
 package dev.glowie.townySpacePorts;
 
 import dev.glowie.townySpacePorts.commands.WarpCommand;
+import dev.glowie.townySpacePorts.commands.WarpReloadCommand;
 import dev.glowie.townySpacePorts.commands.WarpTabCompletion;
 import dev.glowie.townySpacePorts.listeners.FlagWarListener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,6 +17,7 @@ public final class TownySpacePorts extends JavaPlugin {
         getCommand("spwarp").setExecutor(new WarpCommand());
         getCommand("spwarp").setTabCompleter(new WarpTabCompletion());
         getServer().getPluginManager().registerEvents(new FlagWarListener(), this);
+        getCommand("reloadspaceports").setExecutor(new WarpReloadCommand());
 
     }
 

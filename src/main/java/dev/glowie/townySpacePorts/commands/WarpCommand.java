@@ -33,8 +33,8 @@ public class WarpCommand implements CommandExecutor {
         ConfigurationSection port = ConfigUtils.getPortSettings(portName, worldName);
 
         ConfigurationSection playerPort = SpaceUtils.findPortFromPlayer(p);
-        String playerWorldName = p.getWorld().toString();
-        String playerPortName = SpaceUtils.findPortNameFromPlayer(p);
+        //String playerWorldName = p.getWorld().toString();
+        //String playerPortName = SpaceUtils.findPortNameFromPlayer(p);
 
         if (playerPort == null) {
             MessagingUtils.errorPlayer(p, "You are not nearby any space port.");
@@ -54,10 +54,11 @@ public class WarpCommand implements CommandExecutor {
 
         if (!ConfigUtils.canPlayerTeleportToPort(port, p, Bukkit.getWorld(worldName))) {
             MessagingUtils.errorPlayer(p , "The space port owner does not allow you to travel there.");
+            return true;
         }
 
         SpaceUtils.teleportPlayer(port, p, Bukkit.getWorld(worldName));
 
-        return false;
+        return true;
     }
 }

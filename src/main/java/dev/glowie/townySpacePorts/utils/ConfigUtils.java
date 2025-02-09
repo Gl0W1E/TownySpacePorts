@@ -3,6 +3,7 @@ package dev.glowie.townySpacePorts.utils;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.utils.CombatUtil;
 import dev.glowie.townySpacePorts.TownySpacePorts;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -20,7 +21,10 @@ public class ConfigUtils {
     }
 
     public static ConfigurationSection getPortSettings(String name, String world) {
-        return getConfig().getConfigurationSection(name).getConfigurationSection(world);
+        if (getConfig().getConfigurationSection(name) != null && getConfig().getConfigurationSection(name).getConfigurationSection(world) != null) {
+            return getConfig().getConfigurationSection(name).getConfigurationSection(world);
+        }
+        return null;
     }
 
     public static Location getPortLocationXYZ(ConfigurationSection portSettings, World world) {
@@ -48,16 +52,16 @@ public class ConfigUtils {
         Town tPort = TownyAPI.getInstance().getTown(l);
         Town tPlayer = TownyAPI.getInstance().getTown(player);
         if (tPlayer != null) {
-            if (tPlayer.getNationOrNull().exists() && tPort.getNationOrNull().exists() && tPort.getNationOrNull() == tPlayer.getNationOrNull()) {
-                relation = "NATION";
-            }
-            if (tPlayer == tPort) {
-                relation = "TOWN";
-            }
-            if (tPort.hasAlly(tPlayer)) {
+            if (CombatUtil.isAlly(tPlayer, tPort)) {
                 relation = "ALLY";
             }
-            if (tPort.hasEnemy(tPlayer) || tPlayer.hasEnemy(tPort)) {
+            if (CombatUtil.isSameNation(tPlayer, tPort)) {
+                relation = "NATION";
+            }
+            if (CombatUtil.isSameTown(tPlayer, tPort)) {
+                relation = "TOWN";
+            }
+            if (CombatUtil.isEnemy(tPort, tPlayer) || CombatUtil.isEnemy(tPlayer, tPort)) {
                 relation = "ENEMY";
             }
         }

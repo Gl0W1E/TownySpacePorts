@@ -9,3 +9,6 @@ commands:
   spwarp:
     usage: /spwarp <world> <name>
     description: Command for using space ports
+  reloadspaceports:
+    description: reload command
+    usage: /reloadspaceports

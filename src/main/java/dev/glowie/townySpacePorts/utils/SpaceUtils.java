@@ -23,16 +23,15 @@ public class SpaceUtils {
 
     public static void teleportPlayer(ConfigurationSection portSettings, Player player, World portWorld) {
 
-        Confirmation.runOnAccept(() -> {
                     int cdSec = ConfigUtils.getCooldownSeconds(portSettings);
                     int cdTick = cdSec*20;
-                    if (!cooldown.containsKey(player.getUniqueId()) || System.currentTimeMillis() - cooldown.get(player.getUniqueId()) > cdSec*1000) {
-                        cooldown.put(player.getUniqueId(), System.currentTimeMillis());
-                    } else {
-                        long calc = (System.currentTimeMillis() - cooldown.get(player.getUniqueId()))/1000;
-                        MessagingUtils.errorPlayer(player , "You need to wait another" + Math.round(cdSec - calc) + " seconds to travel again.");
-                        return;
-                    }
+                    //if (!cooldown.containsKey(player.getUniqueId()) || System.currentTimeMillis() - cooldown.get(player.getUniqueId()) > cdSec*1000) {
+                    //    cooldown.put(player.getUniqueId(), System.currentTimeMillis());
+                    //} else {
+                    //    long calc = (System.currentTimeMillis() - cooldown.get(player.getUniqueId()))/1000;
+                    //    MessagingUtils.errorPlayer(player , "You need to wait another" + Math.round(cdSec - calc) + " seconds to travel again.");
+                    //    return;
+                    //}
                     int warmupSec = ConfigUtils.getWarmupSeconds(portSettings);
                     int warmupTick = warmupSec*20;
                     MessagingUtils.messagePlayer(player, "You will depart in §b" + warmupSec + " seconds§a.");
@@ -54,9 +53,7 @@ public class SpaceUtils {
                             MessagingUtils.messagePlayer(player,"Arrived at the space port.");
                         }
                     }, warmupTick);
-                })
-                .runOnCancel(() -> MessagingUtils.errorPlayer(player,"Your trip has been canceled."))
-                .sendTo(player);
+
 
     }
 

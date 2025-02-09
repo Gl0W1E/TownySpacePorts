@@ -19,22 +19,26 @@ public class WarpTabCompletion implements TabCompleter {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
 
         if (!(sender instanceof Player)) {
-            return List.of("NONE");
+            return List.of("NONE1");
         }
 
         Player p = (Player) sender;
+        if (SpaceUtils.findPortFromPlayer(p) == null) {
+            return List.of("NONE2");
+        }
+
         List<String> allowedWorlds = ConfigUtils.getAllowedWorlds(SpaceUtils.findPortFromPlayer(p));
 
-        if (args.length == 0) {
+        if (args.length == 1) {
             return allowedWorlds;
         }
 
         List<String> allowedPorts = ConfigUtils.getAllowedPorts(SpaceUtils.findPortFromPlayer(p), args[0]);
 
-        if (args.length != 1) {
+        if (args.length != 2) {
             return allowedPorts;
         }
 
-        return List.of("NONE");
+        return allowedPorts;
     }
 }
