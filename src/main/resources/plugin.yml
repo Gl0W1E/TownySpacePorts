@@ -1,0 +1,11 @@
+name: TownySpacePorts
+version: '0.1'
+main: dev.glowie.townySpacePorts.TownySpacePorts
+api-version: '1.20'
+authors: [ Gl0W1E ]
+description: Mongolian Tech Software
+website: https://github.com/Gl0W1E
+commands:
+  spwarp:
+    usage: /spwarp <world> <name>
+    description: Command for using space ports

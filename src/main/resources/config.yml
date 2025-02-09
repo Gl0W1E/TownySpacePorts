@@ -1,0 +1,22 @@
+
+# /spwarp <world> <name>
+
+A:
+  mars:
+    location: [0,100,0]
+    allowed_ports:
+      space: [A,B,C]
+      mars: [D,E,F]
+    allowed_relations: [ ENEMY,ALLY,NATION,TOWN,OUTSIDER ]
+    warmup: 20
+    cooldown: 60
+    conquer_rest: true
+  space:
+    location: [ 0,100,0 ]
+    allowed_ports:
+      space: [ A,B,C ]
+      mars: [ D,E,F ]
+    allowed_relations: [ ENEMY,ALLY,NATION,TOWN,OUTSIDER ]
+    warmup: 20
+    cooldown: 60
+    conquer_rest: true
